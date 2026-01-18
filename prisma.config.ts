@@ -1,13 +1,13 @@
-// prisma.config.ts — в корне проекта (рядом с package.json!)
-import 'dotenv/config'           // ← это обязательно, чтобы .env подгружался
-import { defineConfig, env } from '@prisma/config'  // или 'prisma/config' — иногда так
+import { defineConfig, env } from 'prisma/config'
+import 'dotenv/config'
 
 export default defineConfig({
-  schema: 'prisma/schema.prisma',  // путь от корня проекта
+  schema: 'prisma/schema.prisma',
   migrations: {
     path: 'prisma/migrations',
+    seed: 'tsx ./prisma/seed.ts',
   },
   datasource: {
-    url: env('DATABASE_URL'),      // ← только имя переменной!
+    url: env('DATABASE_URL'),
   },
 })
