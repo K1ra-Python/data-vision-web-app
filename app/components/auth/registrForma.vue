@@ -25,6 +25,7 @@ const error = ref(null);
 const loading = ref(false);
 
 const submit = async () => {
+  event.preventDefault();
   error.value = null;
   loading.value = true;
 
@@ -46,10 +47,11 @@ const submit = async () => {
     // здесь можно сделать redirect или показать успех
     // navigateTo('/login') например
   } catch (err) {
-    error.value = err.message;
-    console.error(err);
+    // Обрабатываем ошибку от сервера
+    errorMessage.value = err.statusMessage || err.message || 'Ошибка регистрации'
+    console.error(err)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
 };
 </script>
