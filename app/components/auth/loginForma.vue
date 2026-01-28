@@ -50,7 +50,7 @@
 
       <!-- Ссылка на регистрацию -->
       <div class="form-footer">
-        Нет аккаунта? <a href="/register" class="link">Зарегистрироваться</a>
+        Нет аккаунта? <NuxtLink to="/register">Зарегестрироваться!</NuxtLink>
       </div>
     </form>
   </div>
