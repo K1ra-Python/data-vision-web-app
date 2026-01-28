@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js" // ✅ правильный провайдер
+  // output можно удалить — тогда клиент будет в node_modules/@prisma/client
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+ id String @id @default(cuid())
+ email String @unique
+ password String
+ name String?
+ datasets Dataset[]
+ templates Template[]
+ createdAt DateTime @default(now())
+}
+model Dataset {
+ id Int @id @default(autoincrement())
+ name String
+ dataUrl String
+ userId String
+ user User @relation(fields: [userId], references: [id])
+ createdAt DateTime @default(now())
+}
+model Template {
+ id Int @id @default(autoincrement())
+ name String
+ config Json
+ userId String
+ user User @relation(fields: [userId], references: [id])
+ createdAt DateTime @default(now())
+}
