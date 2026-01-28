@@ -79,7 +79,7 @@
       >
         {{ loading ? 'Регистрация...' : 'Зарегистрироваться' }}
       </button>
-
+      <NuxtLink to="/auth">About page</NuxtLink>
       <!-- Серверная ошибка -->
       <div v-if="error" class="server-error">
         {{ error }}
