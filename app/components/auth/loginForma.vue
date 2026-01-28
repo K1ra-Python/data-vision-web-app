@@ -60,6 +60,8 @@
 import { reactive, ref, computed } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
+import { useUserStore } from '../../store/user'  // путь к твоему Pinia стору
+import { navigateTo } from '#app'
 
 // -----------------
 // Форма
@@ -140,6 +142,9 @@ const submit = async () => {
 
     console.log('Успешный вход, данные пользователя:', data.value)
     // Тут можно сохранить user в стор/пиней или редирект
+     const userStore = useUserStore()
+  userStore.setUser(data.value.user) // сохраняем в стор и куку
+  navigateTo('/profile') 
   } catch (err) {
     error.value = err.message || 'Ошибка входа'
   } finally {
