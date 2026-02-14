@@ -16,17 +16,29 @@ export const useUserStore = defineStore('user', {
     },
 
     // Загружаем юзера из куки
-    loadUser() {
-      const userCookie = useCookie('user', { sameSite: 'lax' })
-      if (userCookie.value) {
-        try {
-          this.user = JSON.parse(userCookie.value)
-        } catch (err) {
-          console.warn('Ошибка парсинга куки user:', err)
-          this.user = null
-        }
-      }
-    },
+  loadUser() {
+  const userCookie = useCookie('user', { sameSite: 'lax' })
+  const val = userCookie.value
+
+  if (!val) {
+    this.user = null
+    return
+  }
+
+  // Если это уже объект — просто присвоить
+  if (typeof val === 'object') {
+    this.user = val
+    return
+  }
+
+  try {
+    this.user = JSON.parse(val)
+  } catch (err) {
+    console.warn('Ошибка парсинга куки user:', err)
+    this.user = null
+  }
+}
+,
 
     // Выход
     logout() {
