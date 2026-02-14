@@ -8,8 +8,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
   }
 
   // Если пользователь не залогинен — редиректим на /login
-  const isPublicPage = ['/auth', '/register'].includes(to.path)
+  const isPublicPage = ['/auth', '/register','/'].includes(to.path)
   if (!isPublicPage && !userStore.user) {
-    return navigateTo('/auth')
+    return navigateTo('/')
   }
 })
